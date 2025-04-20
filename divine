@@ -1,0 +1,51 @@
+class Smartphone:
+    def __init__(self, brand, model, storage, battery_percent):
+        self.brand = brand
+        self.model = model
+        self.storage = storage  
+        self.battery_percent = battery_percent  
+        self.is_on = False
+
+    def power_on(self):
+        if self.battery_percent > 0:
+            self.is_on = True
+            print(f"{self.brand} {self.model} is now ON.")
+        else:
+            print("Battery too low to power on.")
+
+    def power_off(self):
+        self.is_on = False
+        print(f"{self.brand} {self.model} is now OFF.")
+
+    def charge(self, amount):
+        if amount < 0:
+            print("You can't uncharge the phone! 🔋")
+            return
+        self.battery_percent = min(100, self.battery_percent + amount)
+        print(f"{self.brand} charged to {self.battery_percent}%.")
+
+    def use_storage(self, amount):
+        if amount <= self.storage:
+            self.storage -= amount
+            print(f"{amount}GB used. {self.storage}GB remaining.")
+        else:
+            print("Not enough storage!")
+
+    def show_status(self):
+        print("📱 Phone Status:")
+        print(f"Brand: {self.brand}")
+        print(f"Model: {self.model}")
+        print(f"Storage Left: {self.storage}GB")
+        print(f"Battery: {self.battery_percent}%")
+        print(f"Power: {'ON' if self.is_on else 'OFF'}")
+
+phone = Smartphone("samsung", "22_ultra", 128, 50)
+phone.show_status()
+phone.power_on()
+phone.use_storage(10)
+phone.charge(30)
+phone.show_status()
+phone.power_off()
+
+
+   
